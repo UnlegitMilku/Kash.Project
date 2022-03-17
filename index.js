@@ -115,6 +115,21 @@ bot.on('message', message => {
     })
   });
 
+bot.on('message', message => {
+        if (message.author.bot) return;
+        if (message.content.includes('discord.gg/') || message.content.includes('discordapp.com/invite/')) {
+  
+            message.delete();
+            message.channel.send(`Invites are not allowed!`);
+            console.log(
+                "Deleted message from: " +
+                message.author.username +
+                message.author +
+                " reason: Link!"
+            );
+         }
+    });
+
 /*bot.on('message', message => {
 if (message.author.bot) return;
         if (message.content.toLowerCase().includes("https://")) {
