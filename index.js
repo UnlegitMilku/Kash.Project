@@ -3,13 +3,13 @@ const bot = new Client({intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"]
 const keepAlive = require("./server");
 
 
-bot.login(YOUR TOKEN HERE);
+bot.login(process.env.BOT_TOKEN);
 
 bot.on('message', message => {
   if (message.author.bot) return;
 })
 
-const bannedwords = ["banned", "words", "here"];
+const bannedwords = ["banned word 1","banned word 2"];
 
 bot.on('message', message => {
   bannedwords.forEach((word ) => {
@@ -23,10 +23,10 @@ bot.on('message', message => {
 });
 
 
-let remindersChannel = "953251365751250955"
+let remindersChannel = "id of reminder channel"
 global.avatarURL = bot.avatarURL;
 
-const botStatusContent = ["set your status here"];
+const botStatusContent = ["status you want","status you want 2"];
 
 bot.on('reconnecting', () => {
     console.log("Bot timed out! reconnecting..");
@@ -43,7 +43,7 @@ bot.on('ready', () => {
     console.log(`==================================`)
     console.log(`Logged in as ${bot.user.tag}!`);
     bot.user.setStatus("online"); console.log(`==================================`)
-  bot.channels.cache.get('953597561485291520').send(`Logged in as ${bot.user.tag} at ` + (time));
+  bot.channels.cache.get('id of channel where you want to send the message').send(`Logged in as ${bot.user.tag} at ` + (time));
 
     setInterval(() => {
         let status = botStatusContent[Math.floor(Math.random() * botStatusContent.length)];
@@ -55,12 +55,6 @@ bot.on('ready', () => {
 bot.on('message', message => {
   if (message.content === '+ping') {  
     message.channel.send(`Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(bot.ws.ping)}ms`);
-  }
-});
-
-bot.on('message', message => {
-  if (message.content === '+osu') {  
-    message.channel.send(`no, quit that game immediately`);
   }
 });
 
@@ -78,16 +72,9 @@ bot.on('message', message => {
 bot.on('message', message => {
   if (message.content === '@everyone') {  
     message.delete();
+    message.member.roles.add("id of mute role");
     message.channel.send(`silence please`);
     console.log('@everyone was used in...');
-  }
-});
-
-bot.on('message', message => {
-  if (message.content === '@mods i use aqn') { 
-    message.member.roles.add("953611174572883968");
-    message.channel.send(`You cannot talk for another 5120 minute(s).`);
-    console.log('...has been muted');
   }
 });
 
